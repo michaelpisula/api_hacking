@@ -11,11 +11,10 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "localhost:8080/ticket",
+					"raw": "{{url}}/ticket",
 					"host": [
-						"localhost"
+						"{{url}}"
 					],
-					"port": "8080",
 					"path": [
 						"ticket"
 					]
@@ -58,11 +57,10 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:8080/ticket",
+					"raw": "{{url}}/ticket",
 					"host": [
-						"localhost"
+						"{{url}}"
 					],
-					"port": "8080",
 					"path": [
 						"ticket"
 					]
@@ -76,11 +74,10 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "localhost:8080/ticket?id={{id}}",
+					"raw": "{{url}}/ticket?id={{id}}",
 					"host": [
-						"localhost"
+						"{{url}}"
 					],
-					"port": "8080",
 					"path": [
 						"ticket"
 					],
@@ -100,11 +97,10 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "localhost:8080/ticketStatusChange?id={{id}}&status=IN_PROGRESS",
+					"raw": "{{url}}/ticketStatusChange?id={{id}}&status=IN_PROGRESS",
 					"host": [
-						"localhost"
+						"{{url}}"
 					],
-					"port": "8080",
 					"path": [
 						"ticketStatusChange"
 					],
@@ -137,17 +133,36 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:8080/ticketUpdate",
+					"raw": "{{url}}/ticketUpdate",
 					"host": [
-						"localhost"
+						"{{url}}"
 					],
-					"port": "8080",
 					"path": [
 						"ticketUpdate"
 					]
 				}
 			},
 			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
 		}
 	],
 	"variable": [
