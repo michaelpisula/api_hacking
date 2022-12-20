@@ -7,6 +7,12 @@ plugins {
 group = "com.tngtech"
 version = "1.0-SNAPSHOT"
 
+java {
+    toolchain {
+        languageVersion.set(JavaLanguageVersion.of(11))
+    }
+}
+
 repositories {
     mavenCentral()
 }
