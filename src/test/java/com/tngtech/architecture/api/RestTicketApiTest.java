@@ -23,7 +23,7 @@ import static org.mockito.Mockito.when;
 import java.util.Collections;
 
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
-public class TicketApiTest {
+public class RestTicketApiTest {
 
 	@Value(value="${local.server.port}")
 	private int port;
@@ -39,7 +39,7 @@ public class TicketApiTest {
 		//given
 
 		//when		
-		String response = restTemplate.getForObject("http://localhost:" + port + "/ticket",
+		String response = restTemplate.getForObject("http://localhost:" + port + "/tickets",
 				String.class);
 		
 		//then
@@ -49,16 +49,15 @@ public class TicketApiTest {
 	@Test
 	public void gettingExistingTicketsShouldReturnTicketList() throws Exception {
 		//given
-		String ticketId = "42";
-		Ticket storedTicket = new Ticket(ticketId, "Unclear answer", "Answer was given, but cannot be understood", TicketStatus.OPEN);
+		Ticket storedTicket = new Ticket("42", "Unclear answer", "Answer was given, but cannot be understood", TicketStatus.OPEN);
 		when(ticketRepository.getAllTickets()).thenReturn(Collections.singletonList(storedTicket));
 
 		//when		
-		String response = restTemplate.getForObject("http://localhost:" + port + "/ticket",
+		String response = restTemplate.getForObject("http://localhost:" + port + "/tickets",
 				String.class);
 		
 		//then
-		assertThat(response).contains(ticketId, "Unclear answer");
+		assertThat(response).contains("42", "Unclear answer");
 	}
 
 	
@@ -70,13 +69,14 @@ public class TicketApiTest {
 		when(ticketRepository.getTicket(ticketId)).thenReturn(storedTicket);
 
 		//when		
-		String response = restTemplate.getForObject("http://localhost:" + port + "/ticket?id="+ticketId,
+		String response = restTemplate.getForObject("http://localhost:" + port + "/tickets/" + ticketId,
 				String.class);
 		
 		//then
 		assertThat(response).contains(ticketId, "Unclear answer");
 	}
 
+		
 	@Test
 	public void addTicket() throws Exception {
 		//given
@@ -84,7 +84,7 @@ public class TicketApiTest {
 		HttpEntity<Ticket> request = new HttpEntity<>(storedTicket);
 
 		//when		
-		ResponseEntity<String> response = restTemplate.postForEntity("http://localhost:" + port + "/ticket", request, String.class);
+		ResponseEntity<String> response = restTemplate.postForEntity("http://localhost:" + port + "/tickets", request, String.class);
 
 		
 		//then
